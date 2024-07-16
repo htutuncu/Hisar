@@ -28,99 +28,25 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
+import com.example.hisar.navigation.SetupNavGraph
 import com.example.hisar.ui.theme.HisarTheme
 import com.example.hisar.ui.theme.Pink80
 
 class MainActivity : ComponentActivity() {
+
+    lateinit var navController: NavHostController
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             HisarTheme {
-                MainScreen()
+                navController = rememberNavController()
+                SetupNavGraph(navController = navController)
             }
         }
-    }
-}
-
-@Composable
-fun MainScreen() {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Pink80)
-    ) {
-
-        Text(
-            text = "Hisar",
-            fontStyle = FontStyle.Italic,
-            fontSize = 50.sp,
-            fontFamily = FontFamily.Monospace,
-            textAlign = TextAlign.Center,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 100.dp)
-        )
-
-        TextField(
-            value = "E-mail",
-            onValueChange = {},
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(20.dp)
-                .padding(top = 100.dp)
-        )
-
-        TextField(
-            value = "Şifre",
-            onValueChange = {},
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(20.dp)
-        )
-
-        Row(modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 20.dp),
-            horizontalArrangement = Arrangement.SpaceAround
-        ) {
-            Button(
-                onClick = { /*TODO*/ },
-                shape = RoundedCornerShape(6.dp),
-                elevation = ButtonDefaults.buttonElevation(
-                    defaultElevation = 10.dp
-                ),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = Color.DarkGray,
-                    contentColor = Color.White
-                ),
-                modifier = Modifier.weight(2f)
-            ) {
-                Text(text = "Giriş Yap")
-            }
-            Spacer(modifier = Modifier.weight(1f))
-            Button(
-                onClick = { /*TODO*/ },
-                shape = RoundedCornerShape(6.dp),
-                elevation = ButtonDefaults.buttonElevation(
-                    defaultElevation = 10.dp
-                ),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = Color.DarkGray,
-                    contentColor = Color.White
-                ),
-                modifier = Modifier.weight(2f)
-            ) {
-                Text(text = "Kayıt Ol")
-            }
-        }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    HisarTheme {
-        MainScreen()
     }
 }
